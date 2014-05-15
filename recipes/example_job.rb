@@ -1,10 +1,11 @@
 #
 # Cookbook Name:: cooking-with-jenkins
-# Recipe:: install
+# Recipe:: define-jenkins-jobs
 #
-# installs all of the stuff we'll be using
+# Adds jobs in Jenkins for testing our cookbooks
 #
 # Copyright (C) 2013 Zachary Stevens
+# Modified 2014 David Schlenk / Spanlink Communications
 # 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,20 +20,12 @@
 # limitations under the License.
 #
 
-# First, make sure apt-update gets run
-include_recipe "apt"
-
-# We'll be pulling code using git
-include_recipe "git::default"
-
-# We'll need a ruby to run cookbook tests, and some of the gems we'll
-# be installing need a few dev packages installed
-ruby_packages = %w{ ruby1.9.3 rake bundler libxml2-dev libxslt-dev }
-ruby_packages.each { |p| package p }
-
-# We'll be running cookbook integration tests under Docker
-include_recipe "docker"
-
-# Finally, install jenkins
-include_recipe "jenkins::server"
-
+# test repo with foodcritic errors, and junit-format rspec output
+cookbook_ci "test" do
+  repository "https://github.com/zts/test-cookbook.git"
+  branch "master"
+  foodcritic true
+  chefspec true
+  kitchen false
+  junit_results true
+end
