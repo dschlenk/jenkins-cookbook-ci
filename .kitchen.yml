@@ -1,20 +1,30 @@
 ---
 driver:
-  name: vagrant
-
-driver_config:
-  provider: vmware_fusion
-  customize:
-    memory: 512
+  name: openstack
+  require_chef_omnibus: latest
+  image_ref: /CentOS/
+  flavor_ref: og.appliance
+  username: ec2-user
+  security_groups:
+    - default
+    - Jenkins
+  openstack_tenant: 'DevOps'
+  network_ref: devops_net
 
 provisioner:
   name: chef_solo
 
 platforms:
-  - name: ubuntu-13.04
+  - name: centos-6.5
+  - name: ubuntu-12.04
+    driver_config: 
+      image_ref: /Ubuntu 12.04/
+      username: ubuntu
 
 suites:
-  - name: default
+  - name: cookbook_ci
     run_list:
-      - recipe[cooking-with-jenkins::default]
+      - recipe[java::default]
+      - recipe[jenkins::master]
+      - recipe[jenkins-cookbook-ci::default]
     attributes:

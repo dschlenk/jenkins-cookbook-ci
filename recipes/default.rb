@@ -17,14 +17,21 @@
 # limitations under the License.
 #
 
-# Install everything
-include_recipe "cooking-with-jenkins::install"
+# Install dependencies
+include_recipe "jenkins-cookbook-ci::install_deps"
 
 # Prepare docker for use under jenkins
-include_recipe "cooking-with-jenkins::configure-docker"
+case node['platform_family']
+when 'debian','ubuntu'
+  unless node['cloud']
+    include_recipe "jenkins-cookbook-ci::configure-docker" 
+  end
+end
 
 # Prepare jenkins for running jobs
-include_recipe "cooking-with-jenkins::configure-jenkins"
+include_recipe "jenkins-cookbook-ci::configure-jenkins"
 
 # Create jobs for the cookbooks we're testing
-include_recipe "cooking-with-jenkins::define-jenkins-jobs"
+include_recipe "jenkins-cookbook-ci::define-jenkins-jobs" do
+  not_if node['jenkins_cookbook_ci']['wrapper_support']
+end

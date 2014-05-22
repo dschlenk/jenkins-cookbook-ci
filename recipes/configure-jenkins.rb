@@ -33,7 +33,7 @@ jenkins_plugin "ansicolor"
 # installed into a job's workspace before running any commands.  We
 # use it to override the test-kitchen configuration to use docker
 # instead of vagrant.
-cookbook_file "#{node[:jenkins][:server][:home]}/custom-config-files.xml" do
+cookbook_file "#{node[:jenkins][:master][:home]}/custom-config-files.xml" do
   owner "jenkins"
   group "jenkins"
   mode "0644"
@@ -50,7 +50,7 @@ end
 # instructions on http://acrmp.github.io/foodcritic/#ci
 jenkins_plugin "analysis-core"
 jenkins_plugin "warnings"
-cookbook_file "#{node[:jenkins][:server][:home]}/hudson.plugins.warnings.WarningsPublisher.xml" do
+cookbook_file "#{node[:jenkins][:master][:home]}/hudson.plugins.warnings.WarningsPublisher.xml" do
   owner "jenkins"
   group "jenkins"
   mode "0644"

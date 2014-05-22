@@ -1,10 +1,11 @@
 #
 # Cookbook Name:: cooking-with-jenkins
-# Recipe:: install
+# Recipe:: install_deps
 #
-# installs all of the stuff we'll be using
+# installs packages required for CI testing cookbooks
 #
 # Copyright (C) 2013 Zachary Stevens
+# Modifed 2014 David Schlenk
 # 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,20 +20,21 @@
 # limitations under the License.
 #
 
-# First, make sure apt-update gets run
-include_recipe "apt"
-
 # We'll be pulling code using git
 include_recipe "git::default"
 
 # We'll need a ruby to run cookbook tests, and some of the gems we'll
 # be installing need a few dev packages installed
-ruby_packages = %w{ ruby1.9.3 rake bundler libxml2-dev libxslt-dev }
-ruby_packages.each { |p| package p }
+node['jenkins_cookbook_ci']['ruby_packages'].each { |p| package p }
 
-# We'll be running cookbook integration tests under Docker
-include_recipe "docker"
+if node['jenkins_cookbook_ci'].has_key? 'gem_packages'
+  node['jenkins_cookbook_ci']['gem_packages'].each { |p| gem_package p }
+end
 
-# Finally, install jenkins
-include_recipe "jenkins::server"
-
+# We'll be running cookbook integration tests under Docker maybe
+case node['platform_family']
+when 'debian','ubuntu'
+  unless node['cloud']
+    include_recipe "docker" 
+  end
+end
