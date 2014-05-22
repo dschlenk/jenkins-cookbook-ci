@@ -37,6 +37,7 @@ define :cookbook_ci, :branch => 'master', :foodcritic => true, :chefspec => fals
 
   template job_config do
     source 'cookbook-job.xml.erb'
+    cookbook 'jenkins-cookbook-ci'
     variables :git_url => repo, :git_branch => params[:branch], :commands => commands.join("\n"), :params => params
     notifies  :create, "jenkins_job[#{job_name}]", :immediately
     notifies  :enable, "jenkins_job[#{job_name}]", :immediately
