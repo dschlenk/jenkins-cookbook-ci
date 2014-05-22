@@ -2,7 +2,7 @@
 
 This cookbook exists to define a Chef Resource to simplify the use of Jenkins 
 CI for Chef cookbook development.  Originally forked from 
-[cooking-with-jenkins](https://github.com/zts/cooking-with-jenkins/tree/master/definitions) - see
+[cooking-with-jenkins](https://github.com/zts/cooking-with-jenkins/) - see
 [the accompanying blog post](http://www.cryptocracy.com/blog/2014/01/03/cooking-with-jenkins-test-kitchen-and-docker/)
 for details and commentary.
 
@@ -34,7 +34,7 @@ cookbook_ci "test" do
 end
 ```
 
-# Author
+# Authors
 
-Author:: Zachary Stevens (<zts@cryptocracy.com>)
-Author:: David Schlenk (<david.schlenk@spanlink.com>)
+Zachary Stevens (<zts@cryptocracy.com>)
+David Schlenk (<david.schlenk@spanlink.com>)
