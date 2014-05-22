@@ -12,9 +12,9 @@ CentOS 6.x and Ubuntu/Debian derivatives are supported.
 
 # Usage
 
-While there is a default recipe in this cookbook, it exists mostly for testing
-and the intent is for you to write your own wrapper cookbook to manage your 
-Jenkins install utilizing 
+While there is a default recipe in this cookbook, it's empty. There is a recipe named 
+`test` that exists for testing and the intent is for you to write your own 
+wrapper cookbook to manage your Jenkins install utilizing 
 [the Chef maintained Jenkins cookbook](https://github.com/opscode-cookbooks/jenkins)
 and simply use the `cookbook_ci` resource defined in this cookbook to make
 defining jobs that test Chef cookbooks less verbose. 
@@ -37,4 +37,5 @@ end
 # Authors
 
 Zachary Stevens (<zts@cryptocracy.com>)
+
 David Schlenk (<david.schlenk@spanlink.com>)
