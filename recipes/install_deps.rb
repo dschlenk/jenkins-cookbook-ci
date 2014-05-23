@@ -21,7 +21,7 @@
 #
 
 # We'll be pulling code using git
-include_recipe "git::default"
+include_recipe 'git::default'
 
 # We'll need a ruby to run cookbook tests, and some of the gems we'll
 # be installing need a few dev packages installed
@@ -38,3 +38,5 @@ when 'debian','ubuntu'
     include_recipe "docker" 
   end
 end
+
+include_recipe 'jenkins-cookbook-ci::configure-jenkins'
