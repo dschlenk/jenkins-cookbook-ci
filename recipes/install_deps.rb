@@ -31,8 +31,6 @@ node['jenkins_cookbook_ci']['ruby_packages'].each { |p| package p }
 case node['platform_family']
 when 'rhel'
   include_recipe 'rvm::user'
-  rvm_gem 'rake'
-  rvm_gem 'bundler'
 end
 
 if node['jenkins_cookbook_ci'].has_key? 'gem_packages'
