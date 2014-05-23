@@ -33,7 +33,9 @@ jenkins_plugin "ansicolor"
 jenkins_plugin "token-macro"
 
 # You can use this plugin to enable docker for kitchen tests in your wrapper cookbook if you please.
-jenkins_plugin "config-file-provider"
+jenkins_plugin "config-file-provider" do
+  version '2.7.4'
+end
 
 # common optional dependencies
 jenkins_plugin "ant"
