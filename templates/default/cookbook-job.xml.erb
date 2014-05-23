@@ -75,7 +75,7 @@
   </publishers>
   <buildWrappers>
 <% if @params[:build_wrappers] -%>
-  <% @params[:build_wrappers.each do |bw| -%>
+  <% @params[:build_wrappers].each do |bw| -%>
     <%=bw%>
   <% end -%>
 <% end -%>
