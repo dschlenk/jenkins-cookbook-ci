@@ -74,6 +74,11 @@
 <% end %>
   </publishers>
   <buildWrappers>
+<% if @params[:build_wrappers] -%>
+  <% @params[:build_wrappers.each do |bw| -%>
+    <%=bw%>
+  <% end -%>
+<% end -%>
     <hudson.plugins.ansicolor.AnsiColorBuildWrapper plugin="ansicolor@0.3.1">
       <colorMapName>xterm</colorMapName>
     </hudson.plugins.ansicolor.AnsiColorBuildWrapper>

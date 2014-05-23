@@ -7,7 +7,10 @@ when 'rhel'
   default['rvm']['user_installs'] = [
     { 'user' => 'jenkins',
       'home' => '/var/lib/jenkins',
-      'default_ruby' => 'ruby-1.9.3'
+      'default_ruby' => 'ruby-1.9.3', 
+      'global_gems' => [
+        { 'name' => 'kitchen-openstack' }
+      ]
     }
   ]
 end
