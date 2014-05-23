@@ -30,7 +30,7 @@ node['jenkins_cookbook_ci']['ruby_packages'].each { |p| package p }
 # some platforms have turribly old ruby, so we'll use system-wide rvm instead.
 case node['platform_family']
 when 'rhel'
-  include_recipe 'rvm::system'
+  include_recipe 'rvm::user'
   rvm_gem 'rake'
   rvm_gem 'bundler'
 end
