@@ -27,6 +27,14 @@ include_recipe 'git::default'
 # be installing need a few dev packages installed
 node['jenkins_cookbook_ci']['ruby_packages'].each { |p| package p }
 
+# some platforms have turribly old ruby, so we'll use system-wide rvm instead.
+case node['platform_family']
+when 'rhel'
+  include_recipe 'rvm::system'
+  rvm_gem 'rake'
+  rvm_gem 'bundler'
+end
+
 if node['jenkins_cookbook_ci'].has_key? 'gem_packages'
   node['jenkins_cookbook_ci']['gem_packages'].each { |p| gem_package p }
 end
