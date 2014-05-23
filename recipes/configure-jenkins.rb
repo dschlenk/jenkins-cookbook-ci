@@ -50,6 +50,7 @@ jenkins_plugin "warnings"
 # install the rvm plugin for rhel derivatives
 case node['platform_family']
 when 'rhel'
+  jenkins_plugin "ruby-runtime"
   jenkins_plugin "rvm"
 end
 cookbook_file "#{node[:jenkins][:master][:home]}/hudson.plugins.warnings.WarningsPublisher.xml" do
